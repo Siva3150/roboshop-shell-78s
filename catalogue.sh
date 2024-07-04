@@ -22,6 +22,15 @@ VALIDATE(){
     fi
 }
 
+if [ $ID -ne 0 ]
+then
+    echo -e "$R ERROR:: Please run this script with root access $N"
+    exit 1 # you can give other than 0
+else
+    echo "You are root user"
+fi # fi means reverse of if, indicating condition end
+
+
 dnf module disable nodejs -y &>> $LOGFILE
 
 VALIDATE $? "Disabling the present version of nodejs" 
@@ -32,13 +41,18 @@ VALIDATE $? "Enabling the given version of nodejs"
 
 dnf install nodejs -y &>> $LOGFILE
 
-VALIDATE $? "Installing nodejs"
+VALIDATE $? "Installing NodeJS:18"
 
-useradd roboshop  &>> $LOGFILE
+id roboshop #if roboshop user does not exist, then it is failure
+if [ $? -ne 0 ]
+then
+    useradd roboshop
+    VALIDATE $? "roboshop user creation"
+else
+    echo -e "roboshop user already exist $Y SKIPPING $N"
+fi
 
-VALIDATE $? "Adding user roboshop"
-
-mkdir /app  &>> $LOGFILE
+mkdir -p /app  &>> $LOGFILE
 
 VALIDATE $? "Creating app directory"
 
