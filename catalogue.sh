@@ -62,7 +62,7 @@ VALIDATE $? "Downloading the content"
 
 cd /app 
 
-unzip /tmp/catalogue.zip  &>> $LOGFILE
+unzip -o /tmp/catalogue.zip  &>> $LOGFILE
 
 VALIDATE $? "Unzipping the code"
 
