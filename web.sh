@@ -34,7 +34,7 @@ dnf install nginx -y  &>>$LOGFILE
 
 VALIDATE $? "Installing nginx"
 
-ystemctl enable nginx &>> $LOGFILE
+systemctl enable nginx &>> $LOGFILE
 
 VALIDATE $? "Enable nginx" 
 
