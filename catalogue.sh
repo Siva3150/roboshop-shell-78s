@@ -104,5 +104,3 @@ VALIDATE $? "Loading catalouge data into MongoDB"
 
 
 
-
-
