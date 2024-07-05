@@ -29,26 +29,22 @@ else
     echo "You are root user"
 fi # fi means reverse of if, indicating condition end
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo  &>> $LOGFILE
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
-VALIDATE $? "Copied mongodb repo"
+VALIDATE $? "Copied MongoDB Repo"
 
 dnf install mongodb-org -y &>> $LOGFILE
 
-VALIDATE $? "Installed mongodb"
+VALIDATE $? "Installing MongoDB"
 
-systemctl enable mongod  &>> $LOGFILE
+systemctl enable mongod &>> $LOGFILE
 
-VALIDATE $? "Enabled mongodb"
+VALIDATE $? "Enabling MongoDB"
 
 systemctl start mongod &>> $LOGFILE
 
-VALIDATE $? "Started mongodb"
+VALIDATE $? "Starting MongoDB"
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
 
-VALIDATE $? "Edited the mongo.conf file"
-
-systemctl restart mongod &>> $LOGFILE
-
-VALIDATE $? "Restarted mongodb"
+VALIDATE $? "setting remote connection"
