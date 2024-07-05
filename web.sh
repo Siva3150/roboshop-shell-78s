@@ -54,8 +54,6 @@ cd /usr/share/nginx/html &>> $LOGFILE
 
 VALIDATE $? "moving nginx html directory"
 
-unzip /tmp/web.zip
-
 unzip -o /tmp/web.zip &>> $LOGFILE
 
 VALIDATE $? "unzipping web"
